@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { sparqlEscapeUri } from 'mu';
+import { sparqlEscapeUri, sparqlEscapeString } from 'mu';
 
 /* eslint-disable-next-line no-extend-native */
 String.prototype.replaceAll = function (from, to) {
@@ -15,16 +15,14 @@ function constructListSubcaseQuery (batchSize, graph) {
   return query;
 }
 
-function constructSubmissionActivityQuery (graph, subcaseUri, submissionActivityUri, submissionActivityTriples) {
+function constructSubmissionActivityQuery (submissionActivities) {
   const p = path.resolve(__dirname, './queries/2-submission-activity.sparql');
   let query = fs.readFileSync(p, { encoding: 'utf8' });
-  query = query.replaceAll('# SUBCASE_PLACEHOLDER', sparqlEscapeUri(subcaseUri));
-  query = query.replaceAll('# SUBMISSION_ACTIVITY_PLACEHOLDER', sparqlEscapeUri(submissionActivityUri));
-  let serializedTriples = '';
-  for (const trip of submissionActivityTriples) {
-    serializedTriples += `${trip.s} ${trip.p} ${trip.o} .\n            `;
+  let serializedValues = '';
+  for (const submissionActivity of submissionActivities) {
+    serializedValues += `(${sparqlEscapeUri(submissionActivity.uri)} ${sparqlEscapeString(submissionActivity.uuid)} ${sparqlEscapeUri(submissionActivity.subcaseUri)})\n            `;
   }
-  query = query.replaceAll('# SUBMISSION_ACTIVITY_TRIPLES_PLACEHOLDER', serializedTriples);
+  query = query.replaceAll('# SUBMISSION_ACTIVITY_VALUES_PLACEHOLDER', serializedValues);
   return query;
 }
 

@@ -3,23 +3,27 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 
 DELETE {
     GRAPH ?g {
-          # SUBCASE_PLACEHOLDER ext:bevatDocumentversie ?document .
+        ?subcase ext:bevatDocumentversie ?document .
     }
 }
 INSERT {
     GRAPH ?g {
-        # SUBMISSION_ACTIVITY_TRIPLES_PLACEHOLDER
-        # SUBMISSION_ACTIVITY_PLACEHOLDER prov:generated ?document ;
-            ext:indieningVindtPlaatsTijdens # SUBCASE_PLACEHOLDER .
-        ?agendaActivity prov:wasInformedBy # SUBMISSION_ACTIVITY_PLACEHOLDER .
+        ?submissionActivity a ext:Indieningsactiviteit ;
+            mu:uuid ?uuid ;
+            prov:generated ?document ;
+            ext:indieningVindtPlaatsTijdens ?subcase .
+        ?agendaActivity prov:wasInformedBy ?submissionActivity .
     }
 }
 WHERE {
     GRAPH ?g {
-        # SUBCASE_PLACEHOLDER ext:bevatDocumentversie ?document .
+        ?subcase ext:bevatDocumentversie ?document .
         OPTIONAL { 
-            ?agendaActivity a besluitvorming:Agendering .
-                besluitvorming:vindtPlaatsTijdens # SUBCASE_PLACEHOLDER .
+            ?agendaActivity a besluitvorming:Agendering ;
+                besluitvorming:vindtPlaatsTijdens ?subcase .
         }
+    }
+    VALUES (?submissionActivity ?uuid ?subcase) {
+        # SUBMISSION_ACTIVITY_VALUES_PLACEHOLDER
     }
 }
