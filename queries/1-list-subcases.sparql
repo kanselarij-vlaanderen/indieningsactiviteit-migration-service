@@ -4,7 +4,7 @@ PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
 SELECT ?subcase
 WHERE {
     GRAPH # GRAPH_PLACEHOLDER {
-        ?subcase a dossier:Procedurestap .
+        ?subcase a dossier:Procedurestap ;
             ext:bevatDocumentversie ?document .
         FILTER NOT EXISTS { ?submissionActivity ext:indieningVindtPlaatsTijdens ?subcase }
     }
