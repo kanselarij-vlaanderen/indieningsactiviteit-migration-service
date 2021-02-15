@@ -6,10 +6,6 @@ import {
 import * as queries from './construct-queries';
 import { parseSparqlResults } from './util';
 
-if (process.env.DRY_RUN === 'true') {
-  update = console.log;
-}
-
 const KANSELARIJ_GRAPH = 'http://mu.semte.ch/graphs/organizations/kanselarij';
 const INDIENINGSACT_BASE_URI = 'http://kanselarij.vo.data.gift/id/indieningsactiviteiten/';
 
