@@ -41,12 +41,12 @@ const BATCH_SIZE = (process.env.BATCH_SIZE && parseInt(process.env.BATCH_SIZE)) 
   console.log('Convert documents on subcase to submissionActivity');
   let i = 1;
   while (true) {
-    console.log(`Batch ${i} ...`);
     const subcaseUris = await fetchSubcaseBatch(BATCH_SIZE, KANSELARIJ_GRAPH);
-    await migrateBatch(subcaseUris);
-    i++;
-    if (subcaseUris.length < BATCH_SIZE) {
+    if (!subcaseUris.length) {
       break;
     }
+    console.log(`Batch ${i} ...`);
+    await migrateBatch(subcaseUris);
+    i++;
   }
 }());
