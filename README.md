@@ -19,24 +19,24 @@ submission-activity-migration:
 The query batch size can be configured through the `BATCH_SIZE` env var, but testing has shown that the query runs best with a batch size of 1.
 
 ## Running instructions
-1. Bring the stack into a maintenance state
+- Bring the stack into a maintenance state
 ```
 drc down
 ```
-2. Start the DB
+- Start the DB
 ```
 drc up -d triplestore
 ```
-3. Start the migration
+- Start the migration
 ```
 drc up -d submission-activity-migration
 ```
-5. Monitor the migration to make sure all goes well 
+- Monitor the migration to make sure all goes well 
 ```
 drc logs -f submission-activity-migration
 ```
-6. Wait for the migration to finish and take it down
+- Wait for the migration to finish and take it down
 ```
 drc down
 ```
-7. Remove the temporary entry in the docker-compose.override file
+- Remove the temporary entry in the docker-compose.override file
