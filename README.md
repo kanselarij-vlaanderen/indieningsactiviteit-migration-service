@@ -25,14 +25,18 @@ drc down
 ```
 2. Start the DB
 ```
-drc up triplestore
+drc up -d triplestore
 ```
 3. Start the migration
 ```
-drc up submission-activity-migration
+drc up -d submission-activity-migration
 ```
-4. Wait for the migration to finish and take it down
+5. Monitor the migration to make sure all goes well 
+```
+drc logs -f submission-activity-migration
+```
+6. Wait for the migration to finish and take it down
 ```
 drc down
 ```
-5. Remove the temporary entry in the docker-compose.override file
+7. Remove the temporary entry in the docker-compose.override file
