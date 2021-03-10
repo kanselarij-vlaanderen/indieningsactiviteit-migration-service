@@ -39,6 +39,7 @@ const BATCH_SIZE = (process.env.BATCH_SIZE && parseInt(process.env.BATCH_SIZE)) 
   while (true) {
     const subcaseUris = await fetchSubcaseBatch(BATCH_SIZE, KANSELARIJ_GRAPH);
     if (!subcaseUris.length) {
+      console.log('Finished migration!');
       break;
     }
     console.log(`Batch ${i} ...`);
