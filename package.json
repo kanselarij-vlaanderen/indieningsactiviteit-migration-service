@@ -11,8 +11,5 @@
     "url": "git+https://github.com/kanselarij-vlaanderen/indieningsactiviteit-migration-service.git"
   },
   "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@lblod/mu-auth-sudo": "^0.2.0"
-  }
+  "license": "MIT"
 }
